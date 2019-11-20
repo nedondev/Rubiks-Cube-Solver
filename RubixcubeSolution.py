@@ -85,7 +85,10 @@ def ida(start):
         frontier.append(start)
 
         while len(frontier) != 0:
-            curr = frontier.pop()
+            curr = frontier.pop(\
+                    [i.g + i.h for i in frontier].index(\
+                    min([i.g+i.h for i in frontier])\
+                    ))
 
             if goal_reached(curr):
                 print('Goal Height:', curr.g)
