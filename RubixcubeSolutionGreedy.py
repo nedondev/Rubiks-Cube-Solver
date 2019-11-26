@@ -3,6 +3,7 @@ import numpy as np
 from datetime import datetime
 import time
 
+
 array = np.array([
     [[0, 0, 2], [1, 0, 2], [2, 0, 2]],
     [[0, 0, 1], [1, 0, 1], [2, 0, 1]],
@@ -29,9 +30,10 @@ array = np.array([
     [[0, 2, 2], [1, 2, 2], [2, 2, 2]],
 ])
 
+
 class State:
     cube = None
-    g = 0
+    depth = 0
     h = 0
     parent = None
     move = None
@@ -89,17 +91,12 @@ def ida(start):
 
         while len(frontier) != 0:
             curr = frontier.pop(\
-                    [i.g + i.h for i in frontier].index(\
-                    min([i.g+i.h for i in frontier])\
+                    [i.h for i in frontier].index(\
+                    min([i.h for i in frontier])\
                     ))
 
             if goal_reached(curr):
-                print('Goal Height:', curr.g)
-                print('Branching Factor:', sum(branching_factors)/len(branching_factors))
-                # while curr is not None:
-                #    if curr.move is not None:
-                #        print(curr.move)
-                #    curr = curr.parent
+                print('Goal Height:', curr.depth)
                 print("Nodes Generated:", nodes)
                 return
 
@@ -108,14 +105,18 @@ def ida(start):
             for i in range(12):
                 new = State()
                 new.cube = np.array(curr.cube)
-                new.g = curr.g + 1
+                new.depth = curr.depth + 1
                 new.parent = curr
                 new.move = make_move(new.cube, i + 1, 0)
                 new.h = corner_edge_sum_max(new.cube)
 
-                if new.g + new.h > cost_limit:
-                    if minimum is None or new.g + new.h < minimum:
-                        minimum = new.g + new.h
+                print("Depth: "+str(new.depth))
+                print("current cost_limit: "+str(cost_limit))
+                print("minimum: "+str(minimum))
+                print("houristic: "+str(new.h))
+                if new.h > cost_limit:
+                    if minimum is None or new.h < minimum:
+                        minimum = new.h
                     continue
                 if curr.parent is not None and (contains1(new.cube, curr) or contains2(new.cube, frontier)):
                     continue
@@ -174,7 +175,7 @@ def corner_edge_sum_max(cube):
 
 curr = State()
 curr.cube = np.array(xInitial)
-handle = open('input.txt')
+handle = open('input2.txt')
 indexes = [0, 1, 2, 3, 6, 9, 12, 4, 7, 10, 13, 5, 8, 11, 14, 15, 16, 17]
 index = 0
 for line in handle:
@@ -187,8 +188,8 @@ for line in handle:
             curr.cube[i, 2] = row[7]
             index = index + 1
 
-fmt = '%H:%M:%S'
 time.ctime()
+fmt = '%H:%M:%S'
 start = time.strftime(fmt)
 
 ida(curr)

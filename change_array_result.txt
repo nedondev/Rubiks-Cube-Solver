@@ -1,0 +1,10 @@
+➜  Rubiks-Cube-Solver git:(master) ✗ python3 RubixcubeSolution.py             
+Goal Height: 6
+Branching Factor: 3.393343419062027
+Nodes Generated: 27144
+Time taken(sec): 0:00:27
+➜  Rubiks-Cube-Solver git:(master) ✗ python3 RubixcubeSolution.py
+Goal Height: 6
+Branching Factor: 3.5236220472440944
+Nodes Generated: 10884
+Time taken(sec): 0:00:11
