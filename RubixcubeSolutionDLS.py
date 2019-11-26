@@ -54,7 +54,7 @@ def contains2(child, frontier):
 
 
 def idfs(start):
-    cost_limit = 1
+    cost_limit = 6
     nodes = 0
     frontier = list()
     branching_factors = list()
@@ -67,11 +67,6 @@ def idfs(start):
 
             if goal_reached(curr.cube):
                 print('Goal Height:', curr.cost)
-                # print('Branching Factor:', sum(branching_factors)/len(branching_factors))
-                # while curr is not None:
-                #    if curr.move is not None:
-                #        print(curr.move)
-                #    curr = curr.parent
                 print("Nodes Generated:", nodes)
                 return
 
@@ -93,7 +88,6 @@ def idfs(start):
                 branching_factors.append(b)
 
         branching_factors.clear()
-        cost_limit = cost_limit + 1
 
 ##########################################
 

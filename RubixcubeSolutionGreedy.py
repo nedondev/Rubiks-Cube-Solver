@@ -175,7 +175,7 @@ def corner_edge_sum_max(cube):
 
 curr = State()
 curr.cube = np.array(xInitial)
-handle = open('input2.txt')
+handle = open('input3.txt')
 indexes = [0, 1, 2, 3, 6, 9, 12, 4, 7, 10, 13, 5, 8, 11, 14, 15, 16, 17]
 index = 0
 for line in handle:
